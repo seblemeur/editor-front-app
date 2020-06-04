@@ -12,11 +12,6 @@ export default class extends React.Component {
       ffmpeg: ffmpeg,
     };
   }
-  componentDidMount() {
-    console.log("window.innerHeight", window.innerHeight);
-    const blob = new Blob();
-    console.log(window.URL.createObjectURL(blob));
-  }
 
   createFF = () => {
     (async () => {
@@ -25,13 +20,11 @@ export default class extends React.Component {
       await this.state.ffmpeg.load();
       await this.state.ffmpeg.write(inPutName, "./" + inPutName);
       await this.state.ffmpeg.transcode(inPutName, outPutName);
-      console.log("finish ?");
+
       const file = this.state.ffmpeg.read(outPutName);
-      console.log(file);
       const blob = new Blob([file], { type: "video/mp4" });
-      console.log(blob);
+
       const url = window.URL.createObjectURL(blob);
-      console.log(url);
       let tempLink = document.createElement("a");
       tempLink.href = url;
       tempLink.setAttribute("download", outPutName);
