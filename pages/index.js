@@ -4,7 +4,10 @@ var path = require("path");
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    const ffmpeg = createFFmpeg({ log: true });
+    const ffmpeg = createFFmpeg({
+      corePath: "./node_modules/@ffmpeg/core/ffmpeg-core.js",
+      log: true,
+    });
     this.state = {
       ffmpeg: ffmpeg,
     };
